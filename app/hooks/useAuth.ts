@@ -4,7 +4,6 @@ import { auth, firestore } from "@/backend/firebase";
 import { User } from "@/types/User";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function useAuth() {
     const [dbUser, setDbUser] = useState<User | null>(null);
