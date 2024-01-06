@@ -14,7 +14,6 @@ export default function useAuth() {
     useEffect(() => {
         auth.onAuthStateChanged(async (user) => {
             await auth.authStateReady();
-            console.log(auth.currentUser);
             if (user) {
                 const uid = user.uid;
                 const userDoc = doc(collection(firestore, "users"), uid);
