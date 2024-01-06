@@ -1,30 +1,35 @@
 "use client";
 
-import { auth } from "@/backend/firebase";
+import { signIn } from "@/backend/auth";
 import useAuth from "@/hooks/useAuth";
-import { Button } from "@nextui-org/react";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Avatar, Button, Skeleton } from "@nextui-org/react";
 import Link from "next/link";
 
 export default function HeaderAccount() {
     const { user, signedIn, loading } = useAuth();
 
     function signedInUI() {
-        if (!signedIn) return;
+        if (!user) return;
         return (
-            <Link href="/dashboard">
-                <Button color="primary">Dashboard</Button>
-            </Link>
-        )
+            <Avatar src={user.picture} showFallback className="cursor-pointer" />
+        );
     }
 
     function signedOutUI() {
         return (
             <Button color="primary" onPress={async () => {
-                await signInWithPopup(auth, new GoogleAuthProvider());
+                await signIn();
             }}>Sign In</Button>
         )
     }
 
-    return signedIn ? signedInUI() : signedOutUI();
+    function loadingUI() {
+        return (
+            <Skeleton className="rounded-full">
+                <Avatar />
+            </Skeleton>
+        );
+    }
+
+    return loading ? loadingUI() : (signedIn ? signedInUI() : signedOutUI());
 }
