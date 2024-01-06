@@ -1,4 +1,5 @@
 import Providers from './components/Providers'
+import Header from './components/header/header'
 import './globals.css'
 
 export default function RootLayout({
@@ -10,6 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
+          <Header />
           {children}
         </Providers>
       </body>
