@@ -44,7 +44,7 @@ export default function SearchHelp() {
                 "X-Goog-FieldMask": "*"
             },
             body: JSON.stringify({
-                maxResultCount: 20,
+                maxResultCount: 19,
                 locationBias: {
                     circle: {
                         center: {
@@ -86,14 +86,11 @@ export default function SearchHelp() {
 
     return (
         <>
-            <div className="w-[80vw] flex">
-
-            </div>
             {loading ?
                 <div className="w-screen flex flex-col items-center justify-center">
                     <Loading />
                 </div> :
-                <div className="w-[80vw] px-8 flex justify-center flex-wrap gap-4 mb-8">
+                <div className="w-[75vw] px-8 grid grid-cols-4 gap-4 mb-8">
                     <div className="w-[300px] h-[247.19px] flex flex-col">
                         <Slider label="Distance (km)" step={0.5} maxValue={50} minValue={1} value={distance} onChange={(value: number | number[]) => {
                             setDistance(value as number);

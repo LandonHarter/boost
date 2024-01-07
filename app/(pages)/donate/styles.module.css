@@ -1,0 +1,24 @@
+.chevron {
+    animation: chevron_animation 1.5s infinite;
+}
+
+@keyframes chevron_animation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    51% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
