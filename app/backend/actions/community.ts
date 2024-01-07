@@ -1,6 +1,6 @@
 "use server";
 
-import { arrayUnion, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
 import { Community } from "@/types/Community";
 
@@ -12,6 +12,13 @@ export async function createCommunity(name: string, description: string) {
         description,
         createdAt: new Date()
     });
+
+    const chatRef = collection(firestore, `communities/${communityId}/chats`);
+    await addDoc(chatRef, {
+        name: "general",
+        createdAt: new Date()
+    });
+
     return communityId;
 }
 
