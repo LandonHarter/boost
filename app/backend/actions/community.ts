@@ -1,7 +1,8 @@
 "use server";
 
-import { collection, doc, setDoc } from "firebase/firestore";
+import { arrayUnion, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
+import { Community } from "@/types/Community";
 
 export async function createCommunity(name: string, description: string) {
     const communityDoc = doc(collection(firestore, "communities"));
@@ -14,10 +15,17 @@ export async function createCommunity(name: string, description: string) {
     return communityId;
 }
 
-export async function joinCommunity(communityId: string, userId: string) {
-    const communityMembers = collection(firestore, `communities/${communityId}/members`);
+export async function joinCommunity(community: Partial<Community>, userId: string) {
+    const communityMembers = collection(firestore, `communities/${community.id}/members`);
     const memberDoc = doc(communityMembers, userId);
     await setDoc(memberDoc, {
         joinedAt: new Date()
+    });
+
+    await updateDoc(doc(collection(firestore, "users"), userId), {
+        communities: arrayUnion({
+            id: community.id,
+            name: community.name
+        })
     });
 }

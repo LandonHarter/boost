@@ -57,7 +57,6 @@ export default function SearchCommunities() {
                         <Input
                             label="Search"
                             variant="faded"
-                            placeholder="Search for a community"
                             value={searchQuery}
                             onValueChange={setSearchQuery}
                             className="w-full mr-2"
@@ -94,7 +93,10 @@ export default function SearchCommunities() {
                                                 return;
                                             }
 
-                                            await joinCommunity(result.id, user.uid);
+                                            await joinCommunity({
+                                                id: result.id,
+                                                name: result.name
+                                            }, user.uid);
                                             toast.success("Joined community");
                                             router.push("/community/" + result.id);
                                         }}>Join</Button>

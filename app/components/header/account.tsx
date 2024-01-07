@@ -25,11 +25,8 @@ export default function HeaderAccount() {
                             <p className="max-w-[150px] text-[14px] font-semibold overflow-hidden text-ellipsis whitespace-nowrap">{user.name}</p>
                         </DropdownItem>
                     </DropdownSection>
-                    <DropdownItem startContent={<AccountSVG className="w-6 h-6 mr-1" pathClassName="stroke-1 stroke-[hsl(var(--nextui-foreground))]" />}>
-                        Profile
-                    </DropdownItem>
-                    <DropdownItem startContent={<SettingsSVG className="w-[27px] h-[27px]" pathClassName="fill-[hsl(var(--nextui-foreground))]" />}>
-                        Settings
+                    <DropdownItem startContent={<AccountSVG className="w-6 h-6 mr-1" pathClassName="stroke-1 stroke-[hsl(var(--nextui-foreground))]" />} href="/communities">
+                        Communities
                     </DropdownItem>
                     <DropdownItem color="danger" className="group" startContent={<SignOutSVG className="w-6 h-6 mr-[3px]" pathClassName="fill-none stroke-2 stroke-red-500 transition-all group-hover:stroke-white" />} onPress={() => {
                         auth.signOut();

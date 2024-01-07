@@ -48,7 +48,10 @@ export default function CreateCommunity() {
 
                 setLoading(true);
                 const communityId = await createCommunity(name, description);
-                await joinCommunity(communityId, user?.uid!);
+                await joinCommunity({
+                    id: communityId,
+                    name,
+                }, user?.uid!);
                 router.push(`/community/${communityId}`);
             }}>
                 <Input name="communityName" variant="faded" placeholder="Community Name" className="w-[500px] h-[50px] text-2xl mb-4" />

@@ -17,6 +17,6 @@ async function createAccountData(user: User) {
         name: displayName,
         email,
         picture: photoURL,
-        accountType: 'user'
+        communities: []
     });
 }

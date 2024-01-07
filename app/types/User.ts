@@ -3,5 +3,8 @@ export type User = {
     name: string;
     email: string;
     picture: string;
-    accountType: 'user' | 'mentor';
+    communities: {
+        id: string;
+        name: string;
+    }[];
 };
