@@ -23,7 +23,7 @@ export default function FindPage() {
                     });
                 }}>Scroll Down</Button>
             </div>
-            <div className="w-screen flex flex-col items-center" ref={search}>
+            <div className="w-screen flex flex-col items-center pt-4" ref={search}>
                 <SearchHelp />
             </div>
         </main>

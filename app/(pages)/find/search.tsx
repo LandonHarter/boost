@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/loading/loading";
 import { PlaceData } from "@googlemaps/google-maps-services-js";
 import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
@@ -81,7 +82,11 @@ export default function SearchHelp() {
         }
     }, []);
 
-    if (loading) return <></>;
+    if (loading) return (
+        <div className="w-screen flex flex-col items-center justify-center">
+            <Loading />
+        </div>
+    );
     return (
         <>
             <div className="w-full px-8 flex justify-center flex-wrap gap-4 mb-8">
