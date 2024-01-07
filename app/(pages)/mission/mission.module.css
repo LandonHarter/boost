@@ -1,0 +1,10 @@
+.text_background {
+    @supports (background-clip: text) or (-webkit-background-clip: text) {
+        background-image: url("/images/mission_background.png");
+        background-size: 100% auto;
+        background-position: center;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+}
