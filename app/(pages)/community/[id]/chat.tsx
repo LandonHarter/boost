@@ -17,6 +17,7 @@ export default function CommunityChat({ communityId, chat }: { communityId: stri
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(true);
     const [messageInput, setMessageInput] = useState("");
+    const [sending, setSending] = useState(false);
 
     useEffect(() => {
         if (!chat) return;
@@ -60,6 +61,7 @@ export default function CommunityChat({ communityId, chat }: { communityId: stri
                 })}
             </div>
             <form className="px-6 flex items-center" action={async (data: FormData) => {
+                if (sending) return;
                 if (!messageInput || messageInput.length < 1) {
                     toast.error("Please enter a message!");
                     return;
@@ -71,10 +73,12 @@ export default function CommunityChat({ communityId, chat }: { communityId: stri
                 }
 
                 setMessageInput("");
+                setSending(true);
                 await sendMessage(messageInput, chat, communityId, user);
+                setSending(false);
             }}>
                 <Input placeholder="Message" name="messageContent" variant="faded" className="mr-2" maxLength={1000} autoComplete="off" value={messageInput} onValueChange={setMessageInput} />
-                <Button isIconOnly color="primary" className="w-[54px] h-[54px] p-3" type="submit">
+                <Button isIconOnly color="primary" className="w-[54px] h-[54px] p-3" type="submit" disabled={sending}>
                     <SendSVG className="h-full" pathClassName="stroke-[1.75px] stroke-white" />
                 </Button>
             </form>
