@@ -7,7 +7,7 @@ import useAuth from "@/hooks/useAuth";
 import SearchSVG from "@/svg/search";
 import { Community } from "@/types/Community";
 import { Button, Card, CardBody, CardHeader, Checkbox, Input } from "@nextui-org/react";
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,7 @@ export default function SearchCommunities() {
     const router = useRouter();
 
     async function search() {
-        const communitiesQuery = query(collection(firestore, "communities"));
+        const communitiesQuery = query(collection(firestore, "communities"), limit(20));
         const communitiesSnapshot = await getDocs(communitiesQuery);
 
         const communities: Community[] = [];

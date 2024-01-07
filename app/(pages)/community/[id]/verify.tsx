@@ -4,13 +4,17 @@ import { firestore } from "@/backend/firebase";
 import Loading from "@/components/loading/loading";
 import useAuth from "@/hooks/useAuth";
 import NotFound from "@/not-found";
-import { collection, doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import CommunitySidebar from "./sidebar";
+import CommunityChat from "./chat";
 
-export default function CommunityContent({ id }: { id: string }) {
+export default function CommunityVerification({ id }: { id: string }) {
     const [verified, setVerified] = useState(false);
     const [loading, setLoading] = useState(true);
     const { user, signedIn, loading: userLoading } = useAuth();
+
+    const [chat, setChat] = useState<string>("");
 
     useEffect(() => {
         if (!userLoading && signedIn) {
@@ -24,6 +28,11 @@ export default function CommunityContent({ id }: { id: string }) {
                     setVerified(false);
                     setLoading(false);
                 }
+
+                const chatDoc = await query(collection(firestore, "communities/" + id + "/chats"), limit(1), orderBy("createdAt", "desc"));
+                const chatSnapshot = await getDocs(chatDoc);
+                const primaryChat = chatSnapshot.docs[0];
+                setChat(primaryChat.id);
             })();
         } else if (!user && !signedIn && !userLoading) {
             setVerified(false);
@@ -42,6 +51,9 @@ export default function CommunityContent({ id }: { id: string }) {
     }
     if (!verified) return <NotFound />;
     return (
-        <main></main>
+        <main className="flex">
+            <CommunitySidebar selected={chat} setSelected={setChat} community={id} />
+            <CommunityChat communityId={id} chat={chat} />
+        </main>
     );
 }
