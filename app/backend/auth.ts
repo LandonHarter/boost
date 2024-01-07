@@ -16,6 +16,7 @@ async function createAccountData(user: User) {
     await setDoc(userDoc, {
         name: displayName,
         email,
-        picture: photoURL
+        picture: photoURL,
+        accountType: 'user'
     });
 }
