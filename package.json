@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.42",
     "@nextui-org/react": "^2.2.9",
+    "axios": "^1.6.5",
     "firebase": "^10.7.1",
     "framer-motion": "^10.17.9",
     "next": "14.0.1",
