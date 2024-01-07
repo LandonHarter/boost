@@ -20,7 +20,7 @@ export default function Header() {
                 <NavbarContent justify="center" className="gap-16">
                     <Link href="/mission"><NavbarItem className="font-semibold text-xl">Mission</NavbarItem></Link>
                     <Link href="/find"><NavbarItem className="font-semibold text-xl">Find Help</NavbarItem></Link>
-                    <Link href="/connect"><NavbarItem className="font-semibold text-xl">Connect</NavbarItem></Link>
+                    <Link href="/impact"><NavbarItem className="font-semibold text-xl">Impact</NavbarItem></Link>
                 </NavbarContent>
                 <NavbarContent justify="end">
                     <HeaderAccount />
